@@ -65,15 +65,15 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
   
   for epoch = 1:nepochs
     fprintf('Epoch %d\n', epoch);
-	
-	batch = 1; % temp
-	% IGNORE THE FOLLOWING LOOP UNTIL ASKED TO IMPLEMENT MINI-BATCH
+    
+    batch = 1; % temp
+    % IGNORE THE FOLLOWING LOOP UNTIL ASKED TO IMPLEMENT MINI-BATCH
     % for batch = 1:nbatches
       % if mod(batch,TEST_PERIOD) == 1
         % Y = nnfunc(wflat, X, Y_gt, arch, tied_w);  
         % iter_callback(nbatches*(epoch-1) + batch, Y);  
       % end
-	  
+      
       % % PUT YOUR CODE HERE
 
       % drawnow
@@ -81,13 +81,13 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
         % break
       % end
     % end
-	
-	[~, fw, dfX] = nnfunc(wflat, X, Y_gt, arch, tied_w);
+    
+    [~, fw, dfX] = nnfunc(wflat, X, Y_gt, arch, tied_w);
 
     step_size = 0;
     % PUT YOUR CODE HERE
     % compute the decreasing step size; use the learning_rate constant
-	
+    
     % update weights
     wflat = wflat - step_size .* dfX;
 
