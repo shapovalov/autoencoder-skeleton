@@ -9,16 +9,16 @@ function [w b] = pretrain(arch, data)
 
   for layer = 1 : nlayers/2
     arch1 = [];
-	% PUT YOUR CODE HERE
-	% compose arch1 of the three relevant layers
-	
+    % PUT YOUR CODE HERE
+    % compose arch1 of the three relevant layers
+    
     numw = [arch1.numw];
     nweights = sum((numw(1:end-1)+1) .* numw(2:end)) - ...
       sum((numw(1:end-1)) .* numw(2:end)) / 2;
     
     wflat = zeros(nweights, 1);
-	% PUT YOUR CODE HERE
-	% initialize wflat with random gaussian noise
+    % PUT YOUR CODE HERE
+    % initialize wflat with random gaussian noise
 
     nepochs = 3;
     nbatches = 1500;
@@ -34,7 +34,7 @@ function [w b] = pretrain(arch, data)
     b{nlayers-layer+1} = b1{2}; 
 
     data = zeros(size(data,1), arch1(2).numw);
-	% PUT YOUR CODE HERE
-	% compute input data for the next layer
+    % PUT YOUR CODE HERE
+    % compute input data for the next layer
   end
 end

@@ -36,8 +36,8 @@ function [Y f df] = nnfunc( wflat, X, Y_gt, arch, tied_w )
   val{1} = X;
   for layer = 2 : nlayers
     val{layer} = zeros(nobjects, arch(layer).numw);
-	% PUT YOUR CODE HERE
-	% compute val{layer}
+    % PUT YOUR CODE HERE
+    % compute val{layer}
   end
   
   Y = val{nlayers};  
@@ -67,14 +67,14 @@ function [Y f df] = nnfunc( wflat, X, Y_gt, arch, tied_w )
     dfdw{layer} = zeros(arch(layer).numw, arch(layer+1).numw);
     dfdb{layer} = zeros(1, arch(layer+1).numw);
     dfdo = zeros(nobjects, arch(layer).numw);
-	% PUT YOUR CODE HERE
+    % PUT YOUR CODE HERE
     % compute the gradients of loss by W, b, o
   end
   
   % if weights are tied, retain only weiths on the lower layers, empty the rest
   if tied_w
     % PUT YOUR CODE HERE
-	% handle tied weights
+    % handle tied weights
   end
   
   df = flatten_weights(dfdw, dfdb);

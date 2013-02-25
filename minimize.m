@@ -74,7 +74,7 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
         % iter_callback(nbatches*(epoch-1) + batch, Y);  
       % end
 	  
-	  % % PUT YOUR CODE HERE
+      % % PUT YOUR CODE HERE
 
       % drawnow
       % if ~ishandle(stopdlg)
@@ -85,13 +85,13 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
 	[~, fw, dfX] = nnfunc(wflat, X, Y_gt, arch, tied_w);
 
     step_size = 0;
-	% PUT YOUR CODE HERE
-	% compute the decreasing step size; use the learning_rate constant
+    % PUT YOUR CODE HERE
+    % compute the decreasing step size; use the learning_rate constant
 	
-	% update weights
+    % update weights
     wflat = wflat - step_size .* dfX;
 
-	% estimate accuracy
+    % estimate accuracy
     Y = nnfunc(wflat, X, Y_gt, arch, tied_w); 
     iter_callback(nbatches*(epoch-1) + batch, Y); 
     
