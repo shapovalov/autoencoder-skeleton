@@ -1,4 +1,5 @@
 load digit0       % load only digit 0 instances
+data = D;
 
 arch1.actfun = @(X) ones(size(X));   % activation function f(X)
 arch1.dactfun = @(Y) zeros(size(Y)); % its derivative AS A FUNCTION OF Y, Y=f(X)
@@ -20,12 +21,14 @@ wflat = zeros(nweights, 1);
 
 % this is for logging all error computations. See compute_error_and_plot function.
 mse_hist = [];
-save pretrain_err mse_hist
+time_hist = [];
+starting_time = cputime;
+save('pretrain_err.mat', 'mse_hist', 'time_hist', 'starting_time');
 
 nepochs = 20;
 nbatches = 1;
 momentum = 0.0;
-iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, true);
+iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, 'pretrain_err.mat', Y, data);
 
 tic;
 wflat = minimize(wflat, data, data, arch, true, nepochs, nbatches, ...
