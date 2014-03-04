@@ -5,7 +5,9 @@ function [w b] = pretrain(arch, data)
 
   % this is for logging all error computations. See compute_error_and_plot function.
   mse_hist = [];
-  save pretrain_err mse_hist
+  time_hist = [];
+  starting_time = cputime;
+  save('pretrain_err.mat', 'mse_hist', 'time_hist', 'starting_time');
 
   for layer = 1 : nlayers/2
     arch1 = [];
@@ -23,7 +25,7 @@ function [w b] = pretrain(arch, data)
     nepochs = 3;
     nbatches = 1500;
     momentum = 0.97;
-    iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, layer==1);
+    iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, 'pretrain_err.mat', layer==1);
 
     wflat = minimize(wflat, data, data, arch1, true, nepochs, nbatches, ...
       iter_callback, momentum);
