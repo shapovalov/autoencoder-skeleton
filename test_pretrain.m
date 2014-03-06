@@ -31,6 +31,6 @@ momentum = 0.0;
 iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, 'pretrain_err.mat');
 
 tic;
-wflat = minimize(wflat, data, data, arch, true, nepochs, nbatches, ...
+wflat = minimize(wflat, data, data, arch, true, nepochs, true, nbatches, ...
   iter_callback, momentum);
 toc

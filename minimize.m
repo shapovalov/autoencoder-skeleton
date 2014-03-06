@@ -1,5 +1,5 @@
 function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
-    nbatches, iter_callback, momentum, learning_rate, shuffle)
+    grad_check, nbatches, iter_callback, momentum, learning_rate, shuffle)
 % wflat: column vector of flattened weights ordered by layers.
 %   Within each layer W{i} flattened by columns is followed by the bias b{i}.
 %   In case of tied weights (tied_w is true), the W{i} parts are empty 
@@ -15,6 +15,7 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
 %     It takes the VALUE of the activation function, not the argument. i >= 2
 % tied_w: flags if the weights are tied in the architecture (default=false)
 % nepochs: number of training loops over the training set (default=100)
+% grad_check: flag showing if the gradient check is necessary
 % nbatches: number of batches training set is divided to on each epoch.
 %   Pass -1 if you want one instance per batch (default=-1)
 % iter_callback: the function called several times per epoch to monitor
@@ -41,21 +42,24 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
     nepochs = 100;  
   end
   if nargin < 7
+    grad_check = true;  
+  end
+  if nargin < 8
     nbatches = -1;  
   end
   if nbatches == -1
     nbatches = nobjects;
   end
-  if nargin < 8
+  if nargin < 9
     iter_callback = @(varargin) 0;  % by default, empty callback
   end
-  if nargin < 9
+  if nargin < 10
     momentum = 0.0; 
   end
-  if nargin < 10
+  if nargin < 11
     learning_rate = 1.0; 
   end
-  if nargin < 11
+  if nargin < 12
     shuffle = true;
   end
 
@@ -83,6 +87,11 @@ function [wflat fw] = minimize(wflat, X, Y_gt, arch, tied_w, nepochs, ...
     % end
     
     [~, fw, dfX] = nnfunc(wflat, X, Y_gt, arch, tied_w);
+    
+    if grad_check
+      % PUT YOUR CODE HERE
+      % estimate some random dimensions of the gradient numerically, compare to dfX
+    end
 
     step_size = 0;
     % PUT YOUR CODE HERE

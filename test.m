@@ -46,7 +46,7 @@ save('pretrain_weights.mat', 'wflat', 'arch');
 % save('train_err.mat', 'mse_hist', 'time_hist', 'starting_time');
 
 % tic;
-% wflat = minimize(wflat, digitdata, digitdata, arch, false, 30, 1500, ...
+% wflat = minimize(wflat, digitdata, digitdata, arch, false, 30, true, 1500, ...
       % @(iter, Y) compute_error_and_plot(iter, Y, digitdata, 'train_err.mat'), 0.97);
 % toc
 

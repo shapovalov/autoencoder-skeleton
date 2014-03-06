@@ -27,7 +27,7 @@ function [w b] = pretrain(arch, data)
     momentum = 0.97;
     iter_callback = @(iter, Y) compute_error_and_plot(iter, Y, data, 'pretrain_err.mat', layer==1);
 
-    wflat = minimize(wflat, data, data, arch1, true, nepochs, nbatches, ...
+    wflat = minimize(wflat, data, data, arch1, true, nepochs, true, nbatches, ...
       iter_callback, momentum);
     [w1, b1] = unflatten_weights(wflat, arch1, true);
     w{layer} = w1{1};
